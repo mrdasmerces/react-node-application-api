@@ -47,4 +47,5 @@ Em seguida, inicie o arquivo server da aplicação.
 node server.js
 ```
 
+A aplicação irá rodar na porta 3000.
 
