@@ -1,6 +1,6 @@
 # react-node-application-api
 
-Aplicação SPA feita com React utilizando JSON Web Token para autenticação na API.
+API Restful desenvolvida em Node.js e Express, com Seed no MongoDB e autenticação com JWT
 
 ### Pré-requisitos
 
