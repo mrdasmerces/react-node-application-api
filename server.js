@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var config = require('./config.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -11,8 +13,17 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.listen(3000, function () {
-  console.log('Running on port 3000');
+app.listen(config.port, function () {
+  console.log('Running on port ' + config.port);
+
+mongoose.connect(config.database);
+
+  //conexão no mongoDB
+  var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function() {
+    console.log('Conectado ao MongoDB.');
+  });
 });
 
 app.route('/user')

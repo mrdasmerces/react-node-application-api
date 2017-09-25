@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/matheusdms/react-node-application-api#readme",
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "^1.18.2",
+    "co": "^4.6.0",
     "express": "^4.15.4",
     "mongoose": "^4.11.12"
   }
