@@ -31,16 +31,15 @@ app.route('/user')
       res.send(tasks);
   })
   .post(function (req, res) {
-      var task = req.body.task;
-      tasks.push({taskName: task});
-      res.send(tasks);
+      
+    
   });
 
-app.route('/tasks/:taskId')
-  .delete(function (req, res) {
-      var index = parseInt(req.params.taskId);
-      tasks.splice(index, 1);
-      res.send(tasks);
+app.route('/produtos')
+  .get(function (req, res) {
+    var produtos = Produto.find().exec();
+
+    res.send(produtos);
   })
 
 module.exports =  app;
