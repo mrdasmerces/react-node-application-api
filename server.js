@@ -3,6 +3,9 @@ var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
+var utils = require('./app/scripts/utils');
+var User = require('./app/models/user');
+var Produto = require('./app/models/produto');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -27,12 +30,24 @@ mongoose.connect(config.database);
 });
 
 app.route('/user')
-  .get(function (req, res) {
-      res.send(tasks);
-  })
   .post(function (req, res) {
-      
-    
+  //busca o usuário e a senha correspondente
+  User.findOne({username: req.body.usuarioLogin.username, password:req.body.usuarioLogin.password})
+  .exec(function(err, user) {
+    if (err) throw err;
+    if (!user) {
+        return res.status(404).json({
+            error: true,
+            message: 'Usuário ou senha incorretas.'
+          });
+    }
+    //gera o token
+    var token = utils.generateToken(user);
+        res.send({
+          user: user,    
+          token: token
+        });
+   });
   });
 
 app.route('/produtos')
